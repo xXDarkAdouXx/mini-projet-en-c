@@ -9,6 +9,60 @@
 //affichagePilotes(pilotes, sizeof(pilotes) / sizeof(pilotes[0]));
 
 
+
+
+
+void affichageEcurie(ECURIE ecurie[], int tailleEcurie) {
+    for (int i = 0; i < tailleEcurie; i++) {
+        printf("nom: %-18s |pays: %-12s |points: %-3d |annee creation: %d |directeur: %-18s |actif: %d\n", ecurie[i].nom, ecurie[i].pays, ecurie[i].points, ecurie[i].anneeCreation, ecurie[i].directeur, ecurie[i].actif);
+    }
+
+
+}
+//affichageEcurie(ecuries, sizeof(ecuries) / sizeof(ecuries[0]));
+
+void affichageGrandPrix(GRANDPRIX grandsPrix[], int tailleGrandPrix) {
+    for (int j = 0; j < tailleGrandPrix; j++) {
+        printf("Grand Prix %d : %s (%s) %d/%d/%d %d:%d nombre de tour: %d\n",
+            j + 1,
+            grandsPrix[j].nomCircuit,
+            grandsPrix[j].pays,
+            grandsPrix[j].date.jour,
+            grandsPrix[j].date.mois,
+            grandsPrix[j].date.annee,
+            grandsPrix[j].horaire.heure,
+            grandsPrix[j].horaire.minute,
+            grandsPrix[j].nombreTours
+);
+
+        for (int i = 0; i < grandsPrix[j].nombreResultats; i++) {
+            printf("%-2d : %-10s %-15s %-2d points\n",
+                   grandsPrix[j].resultatCourse[i].position,
+                   grandsPrix[j].resultatCourse[i].prenomPilote,
+                   grandsPrix[j].resultatCourse[i].nomPilote,
+                   grandsPrix[j].resultatCourse[i].pointObtenus);
+        }
+        printf("\n");
+    }
+}
+
+//affichageGrandPrix(grandsPrix, sizeof(grandsPrix) / sizeof(grandsPrix[0]));
+
+void pointPilotes(GRANDPRIX grandsPrix[], int tailleGrandPrix, PILOTE pilotes[]) {
+    for (int i=0; i<tailleGrandPrix;i++) {
+        for (int j=0; j<grandsPrix[i].nombreResultats;j++) {
+            for (int k=0; k<grandsPrix[i].nombreResultats;k++) {
+                if (strcmp(pilotes[k].nom, grandsPrix[i].resultatCourse[j].nomPilote) ==0) {
+                    pilotes[k].points += grandsPrix[i].resultatCourse[j].pointObtenus;
+                }
+            }
+        }
+    }
+}
+
+
+
+
 int main(void) {
 
     // Initialisation des écuries
@@ -40,7 +94,7 @@ int main(void) {
     strcpy(gp1.pays, "Monaco");
     gp1.nombreTours = 78;
     gp1.date = (DATE){26, 5, 2024};
-    gp1.horaire = (HEURE){15, 0};
+    gp1.horaire = (HEURE){15, 00};
     gp1.nombreResultats = 10;
     gp1.actif = 1;
 
@@ -67,7 +121,7 @@ int main(void) {
     strcpy(gp2.pays, "Espagne");
     gp2.nombreTours = 66;
     gp2.date = (DATE){2, 6, 2024};
-    gp2.horaire = (HEURE){15, 0};
+    gp2.horaire = (HEURE){15, 00};
     gp2.nombreResultats = 10;
     gp2.actif = 1;
 
@@ -94,7 +148,7 @@ int main(void) {
     strcpy(gp3.pays, "Canada");
     gp3.nombreTours = 70;
     gp3.date = (DATE){9, 6, 2024};
-    gp3.horaire = (HEURE){20, 0};
+    gp3.horaire = (HEURE){20, 00};
     gp3.nombreResultats = 10;
     gp3.actif = 1;
 
@@ -121,7 +175,7 @@ int main(void) {
     strcpy(gp4.pays, "Autriche");
     gp4.nombreTours = 71;
     gp4.date = (DATE){30, 6, 2024};
-    gp4.horaire = (HEURE){15, 0};
+    gp4.horaire = (HEURE){15, 00};
     gp4.nombreResultats = 10;
     gp4.actif = 1;
 
@@ -148,7 +202,7 @@ int main(void) {
     strcpy(gp5.pays, "Royaume-Uni");
     gp5.nombreTours = 52;
     gp5.date = (DATE){7, 7, 2024};
-    gp5.horaire = (HEURE){16, 0};
+    gp5.horaire = (HEURE){16, 00};
     gp5.nombreResultats = 10;
     gp5.actif = 1;
 
@@ -172,53 +226,9 @@ int main(void) {
 
     GRANDPRIX grandsPrix[5] = {gp1, gp2, gp3, gp4, gp5};
 
+    //pointPilotes(grandsPrix, sizeof(grandsPrix) / sizeof(grandsPrix[0]),pilotes);
+    affichageGrandPrix(grandsPrix, sizeof(grandsPrix) / sizeof(grandsPrix[0]));
 
-
-
-
-    void affichageEcurie(ECURIE ecurie[], int tailleEcurie) {
-        for (int i = 0; i < tailleEcurie; i++) {
-            printf("nom: %-18s |pays: %-12s |points: %-3d |annee creation: %d |directeur: %-18s |actif: %d\n", ecurie[i].nom, ecurie[i].pays, ecurie[i].points, ecurie[i].anneeCreation, ecurie[i].directeur, ecurie[i].actif);
-        }
-
-
-    }
-    //affichageEcurie(ecuries, sizeof(ecuries) / sizeof(ecuries[0]));
-
-    void affichageGrandPrix(GRANDPRIX grandsPrix[], int tailleGrandPrix) {
-        for (int j = 0; j < tailleGrandPrix; j++) {
-            printf("Grand Prix %d : %s (%s)\n",
-                   j + 1,
-                   grandsPrix[j].nomCircuit,
-                   grandsPrix[j].pays);
-
-            for (int i = 0; i < grandsPrix[j].nombreResultats; i++) {
-                printf("%-2d : %-10s %-15s %-2d points\n",
-                       grandsPrix[j].resultatCourse[i].position,
-                       grandsPrix[j].resultatCourse[i].prenomPilote,
-                       grandsPrix[j].resultatCourse[i].nomPilote,
-                       grandsPrix[j].resultatCourse[i].pointObtenus);
-            }
-            printf("\n");
-        }
-    }
-
-   //affichageGrandPrix(grandsPrix, sizeof(grandsPrix) / sizeof(grandsPrix[0]));
-
-    void pointPilotes(GRANDPRIX grandsprix[], int tailleGrandPrix) {
-        for (int i=0; i<tailleGrandPrix;i++) {
-            for (int j=0; j<grandsPrix[i].nombreResultats;j++) {
-                for (int k=0; k<grandsPrix[i].nombreResultats;k++) {
-                    if (strcmp(pilotes[k].nom, grandsPrix[i].resultatCourse[j].nomPilote) ==0) {
-                        pilotes[k].points += grandsPrix[i].resultatCourse[j].pointObtenus;
-                    }
-                }
-            }
-        }
-    }
-
-    //pointPilotes(grandsPrix, sizeof(grandsPrix) / sizeof(grandsPrix[0]));
-    affichagePilotes(pilotes, sizeof(pilotes) / sizeof(pilotes[0]));
-
+    //affichagePilotes(pilotes, sizeof(pilotes) / sizeof(pilotes[0]));
     return 0;
 }
