@@ -37,5 +37,9 @@ typedef struct {
     int actif;
 }GRANDPRIX;
 
-
+RESULTATCOURSE saisirResultat();
+GRANDPRIX saisirGrandPrix();
+void ajouterGrandPrix(GRANDPRIX grandsPrix[], int *nbGP);
+void ajouterGrandPrixAutomatique(GRANDPRIX grandsPrix[], int *nbGP);
+void affichageGrandPrix(GRANDPRIX grandsPrix[], int tailleGrandPrix);
 #endif //GRANDPRIX_H

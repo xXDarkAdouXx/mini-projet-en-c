@@ -4,6 +4,7 @@
 #ifndef PILOTE_H
 #define PILOTE_H
 #include "ecurie.h"
+#include "grandprix.h"
 
 
 typedef struct {
@@ -16,7 +17,7 @@ typedef struct {
     int age;
     int actif;
 }PILOTE;
-
+void pointPilotes(GRANDPRIX grandsPrix[], int tailleGrandPrix, PILOTE pilotes[], int nbPilotes);
 void affichagePilotes(PILOTE pilote[], int taillePilote);
 
 

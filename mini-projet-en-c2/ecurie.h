@@ -14,4 +14,7 @@ typedef struct {
     int actif;
 }ECURIE;
 
+
+void affichageEcurie(ECURIE ecurie[], int tailleEcurie);
+
 #endif //ECURIE_H
