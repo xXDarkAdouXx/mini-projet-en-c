@@ -12,9 +12,10 @@ typedef struct {
     int anneeCreation;
     char directeur[50];
     int actif;
-}ECURIE;
+} ECURIE;
 
 
 void affichageEcurie(ECURIE ecurie[], int tailleEcurie);
+//void ajoutEcurie(ECURIE **ecurie, int *tailleEcurie);
 
 #endif //ECURIE_H
