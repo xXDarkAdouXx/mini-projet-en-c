@@ -3,7 +3,6 @@
 //
 #ifndef PILOTE_H
 #define PILOTE_H
-#include "ecurie.h"
 #include "grandprix.h"
 
 

@@ -4,6 +4,7 @@
 
 #ifndef ECURIE_H
 #define ECURIE_H
+#include "pilote.h"
 
 typedef struct {
     char nom[50];
@@ -16,6 +17,7 @@ typedef struct {
 
 
 void affichageEcurie(ECURIE ecurie[], int tailleEcurie);
-//void ajoutEcurie(ECURIE **ecurie, int *tailleEcurie);
+void ajoutEcurie(ECURIE **ecurie, int *tailleEcurie);
+void calculPointEcurie(ECURIE ecurie[],int tailleEcurie, PILOTE pilotes[], int nbPilotes);
 
 #endif //ECURIE_H

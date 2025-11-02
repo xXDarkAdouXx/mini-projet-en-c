@@ -59,7 +59,7 @@ PILOTE *initPilotes(int *nbPilotes) {
 
     strcpy(pilotes[0].nom, "Verstappen");
     strcpy(pilotes[0].prenom, "Max");
-    strcpy(pilotes[0].nationalite, "nationalite-Bas");
+    strcpy(pilotes[0].nationalite, "Pays-Bas");
     strcpy(pilotes[0].ecurie, "Red Bull Racing");
     pilotes[0].points = 0;
     pilotes[0].numero = 1;

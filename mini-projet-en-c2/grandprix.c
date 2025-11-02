@@ -4,6 +4,8 @@
 
 #include "grandprix.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 RESULTATCOURSE saisirResultat() {
     RESULTATCOURSE r;
@@ -28,6 +30,7 @@ RESULTATCOURSE saisirResultat() {
 
     return r;
 }
+/*
 
     GRANDPRIX saisirGrandPrix() {
     GRANDPRIX gp;
@@ -59,20 +62,36 @@ RESULTATCOURSE saisirResultat() {
     gp.actif = 1;
     return gp;
 }
+*/
 
-
-
-void ajouterGrandPrix(GRANDPRIX grandsPrix[], int *nbGP) {
+void saisirGrandPrix(GRANDPRIX **grandprix, int *nbGP) {
     if (*nbGP >= 20) {
         printf("Impossible d'ajouter un nouveau Grand Prix : tableau plein.\n");
         return;
     }
-    grandsPrix[*nbGP] = saisirGrandPrix();
-    (*nbGP)++;
-
-    printf("Grand Prix ajoute ! Nombre de GP : %d\n", *nbGP);
+    // Realloc de la mémoire pour un nouveau GP
+    *grandprix = realloc(*grandprix, (*nbGP + 1) * sizeof(GRANDPRIX));
+    if (*grandprix == NULL) {
+        perror("Erreur de réallocation mémoire");
+        exit(EXIT_FAILURE);
+    }
+    GRANDPRIX *g = &((*grandprix)[*nbGP]);
+    printf("\n=== Création d'un nouveau GP ===\n");
+    printf("Nom du GP : ");
+    scanf(" %[^\n]", g->nomCircuit);
+    printf("Pays : ");
+    scanf(" %[^\n]", g->pays);
+    printf("Nombre de tours : ");
+    scanf("%d", &g->nombreTours);
+    printf("Jour, Mois, Annee: ");
+    scanf("%d %d %d", &g->date.jour, &g->date.mois, &g->date.annee);
+    printf("Heure : ");
+    scanf("%d %d", &g->horaire.heure, &g->horaire.minute);
+    printf("Active (1 = oui, 0 = non) : ");
+    scanf("%d", &g->actif);
 }
 
+/*
 void ajouterGrandPrixAutomatique(GRANDPRIX grandsPrix[], int *nbGP) {
     if (*nbGP >= 20) {
         printf("Impossible d'ajouter un nouveau Grand Prix : tableau plein.\n");
@@ -80,10 +99,9 @@ void ajouterGrandPrixAutomatique(GRANDPRIX grandsPrix[], int *nbGP) {
     }
     grandsPrix[*nbGP] = saisirGrandPrix();
     (*nbGP)++;
-
     printf("Grand Prix ajoute ! Nombre de GP : %d\n", *nbGP);
 }
-
+*/
 void affichageGrandPrix(GRANDPRIX grandsPrix[], int tailleGrandPrix) {
     for (int j = 0; j < tailleGrandPrix; j++) {
         GRANDPRIX gp = grandsPrix[j];
