@@ -32,10 +32,11 @@ int main(void) {
     calculPointEcurie(ecuries, nbEcuries, pilotes, nbPilotes);
 
     //Partie dédiée à l'affichage de l'interface utilisateur
-    char *menuPrincipal[5] = {"Gestion des Pilotes", "Gestion des Ecuries", "Gestion des Grands Prix", "Affichage Données", "Quitter"};
+    char *menuPrincipal[5] = {"Gestion des Pilotes", "Gestion des Ecuries", "Gestion des Grands Prix", "Affichage des classements", "Quitter"};
     char *menuGestionPil[3] = {"Ajouter un Pilote", "Supprimer un pilote", "Afficher la liste des pilotes"};
     char *menuGestionEcu[3] = {"Ajouter une Ecurie", "Supprimer une Ecurie", "Afficher la liste des Ecuries"};
     char *menuGestionGP[3] = {"Ajouter un Grand Prix", "Supprimer un GP", "Afficher la liste des GP"};
+    char *menuAffClass[3] = {"Afficher Classements GP","Afficher Classements Pilotes","Afficher Classements Ecuries"};
     //char *menuAffClass[4] = {"", "Mettre à jour les points des pilotes", "Supprimer un pilote", "Afficher la liste des pilotes"};
 
 
@@ -113,7 +114,24 @@ int main(void) {
                 printf("Retour au menu principal... \n");
                 break;
             case 4:
-                printf("Not implemented yet!");
+                for (int i = 0; i < 3; i++) {
+                    printf("[%d] %s \n", i + 1, menuAffClass[i]);
+                }
+                printf("Quelle données voulez vous afficher?");
+                scanf("%d",&choice);
+                switch (choice) {
+                    case 1:
+                        affichageClassementCourse(grandsPrix, nbGP);
+                        break;
+                    case 2:
+                        affichageClassementPilotes(pilotes, nbPilotes);
+
+                        break;
+                    case 3:
+                        calculPointEcurie(ecuries, nbEcuries, pilotes, nbPilotes);
+                        affichageClassementEcurie(ecuries, nbEcuries);
+                        break;
+                }
                 break;
             case 5:
                 printf("Au revoir !");
@@ -124,4 +142,5 @@ int main(void) {
     free(pilotes);
     free(grandsPrix);
     return 0;
+
 }
